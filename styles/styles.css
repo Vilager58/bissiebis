@@ -1,0 +1,61 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+body{
+    background-color: #edeec9;
+    vertical-align : middle;
+    height: 80vh;
+}
+ .card_holder{
+    display : flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+ }
+
+ .lesson-card-horizontal {
+    display: inline-block;
+    background-color: #bfd8bd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    padding: 10px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Arial, sans-serif;
+}
+
+.lesson-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.lesson-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.lesson-number {
+    font-size: 14px;
+    color: #888;
+}
+
+.lesson-name {
+    font-size: 20px;
+    color: #333;
+    margin: 5px 0;
+}
+
+.teacher-name,
+.classroom {
+    font-size: 16px;
+    color: #555;
+    margin: 2px 0;
+}
