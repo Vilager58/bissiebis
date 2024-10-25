@@ -22,6 +22,7 @@ body{
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 600px;
+    min-height: 100px;
     padding: 10px;
     width: 90%;
     display: flex;
@@ -58,19 +59,19 @@ width: 10%;
     color: #52796f;
     text-align: center;
 
-    font: 13px Arial, sans-serif;
+    font: 1.2vh Arial, sans-serif;
 }
 
 .lesson-name {
-    font-size: 30px;
+    font-size: 2.5vh;
     color: #173d30;
     height: 10px
 }
 
 .lesson-time {
-    font-size: 18px;
+    font-size: 1.5vh;
     color: #173d30;
-    height: 10px
+    height: 30%;
 }
 
 .teacher-name{
@@ -80,7 +81,7 @@ width: 10%;
     flex-direction: row;
     align-items: center;
     color: #173d30;
-    font-size: 24px;
+    font-size: 2vh;
 }
 
 .classroom {
@@ -89,7 +90,7 @@ width: 10%;
     justify-content: space-evenly;
     flex-direction: row;
     align-items: center;
-    font-size: 24px;
+    font-size: 2vh;
     color: #173d30;
 
 }
