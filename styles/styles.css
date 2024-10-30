@@ -23,7 +23,10 @@ body{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 600px;
     min-height: 100px;
+    max-height: 15%;
     padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
     width: 90%;
     display: flex;
     align-items: center;
@@ -65,13 +68,15 @@ width: 10%;
 .lesson-name {
     font-size: 2.5vh;
     color: #173d30;
-    height: 10px
+    margin: 0;
+    margin-top: 10px;
 }
 
 .lesson-time {
     font-size: 1.5vh;
     color: #173d30;
     height: 30%;
+    margin: 0;
 }
 
 .teacher-name{
@@ -82,6 +87,8 @@ width: 10%;
     align-items: center;
     color: #173d30;
     font-size: 2vh;
+    height: 50%;
+    margin: 0;
 }
 
 .classroom {
@@ -92,5 +99,6 @@ width: 10%;
     align-items: center;
     font-size: 2vh;
     color: #173d30;
+    margin: 0;
 
 }
