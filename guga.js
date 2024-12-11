@@ -45,13 +45,12 @@ function obtain_schedule(data) {
   $(".card_holder").empty();
   selector = localStorage.getItem("st_selector");
   filter = localStorage.getItem("st_filter");
-  if(obtained === false) setup_sel_menu(data);
-  if(!localStorage.getItem("st_selector")){
+   if (!localStorage.getItem("st_selector") | !localStorage.getItem("st_filter")){
+    localStorage.setItem("st_filter", 'filter');
     notify("clear");
     notify("add", "Ошибка", "Укажите фильтр в настройках!");
     setup_sel_menu(data);
     $("#nav-toggle").click();
-
   } else {
     switch(selector){
         case 'group':
@@ -97,6 +96,8 @@ function obtain_schedule(data) {
 
             break
     }
+    if(obtained === false) setup_sel_menu(data);
+
     obtained = true;
     
   };
