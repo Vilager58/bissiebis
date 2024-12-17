@@ -498,16 +498,16 @@ let neds = [
         main();
     });
 
-function nasvay_setup{
-    $.ajax({
-        url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSEhshF7HT51ZVcR1rtuVx-M2GPVx4YFRKcR8xhxD9mgkHKJE65o-4zfJ8GQPqNrCwRxQT4PRzFXzLb/pubhtml',
-        method: 'GET',
-        dataType: 'html',
-        success: function (response) {
-            return response;
-            
-        },
-        error: function (error) {
-        }
-    });
-}
+//function nasvay_setup{
+//    $.ajax({
+ //       url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSEhshF7HT51ZVcR1rtuVx-M2GPVx4YFRKcR8xhxD9mgkHKJE65o-4zfJ8GQPqNrCwRxQT4PRzFXzLb/pubhtml',
+ //       method: 'GET',
+ //       dataType: 'html',
+//        success: function (response) {
+//            return response;
+//            
+//        },
+//        error: function (error) {
+//        }
+//    });
+//}
