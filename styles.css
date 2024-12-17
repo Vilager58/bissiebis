@@ -206,11 +206,11 @@ h3{
    z-index: 2;
 
    max-width: 700px;
-   max-height: 15%;
    padding: 10px;
    margin-top: 50px;
    margin-bottom: 8px;
    width: 90%;
+   height: 20%;
    display: flex;
    align-items: center;
    justify-content: space-between;
@@ -409,6 +409,8 @@ h3{
   align-items: center;
   overflow: auto;
  }
+
+ 
  
 
  .groups{
@@ -421,10 +423,11 @@ h3{
  }
 
  .m_btn{
-  color: var(--color1);
+  color: var(--text);
   text-align: center;
   background-color: var(--color6);
   border-radius: 10px;
+  border: 2px solid var(--color6);
   padding: 10px;
   margin: 5px;
   cursor: pointer;
@@ -432,8 +435,8 @@ h3{
  }
 
  .m_btn.active{
-  color: var(--color6);
   background-color: var(--color1);
+
   transition: 0.5s ease-in-out;
  }
 
@@ -475,7 +478,7 @@ button.primary {
   font-size: 15px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: end;
 }
 .theme{
   padding: 2px;
@@ -499,18 +502,23 @@ body {
 
  /* предметы ============================== */
  .data{
+  width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
+  font-size: 1lvh;
+  max-height: 100px;
  
  }
  .day {
   color: var(--text);
-  margin: 10px;
+  margin: 5px;
+
  }
  .sub_date{
   color: var(--text);
-  margin: 10px;
+  margin: 5px;
+
  }
 
  .card_holder {
@@ -655,6 +663,10 @@ body {
   margin-right: 5px;
   align-self: center;
   margin-bottom: 5px;
+  
+ }
+ path{
+  fill: var(--text);
  }
 
  /* предметы ============================== */
