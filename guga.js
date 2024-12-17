@@ -1,8 +1,4 @@
-const today = new Date();
-date = String(today.getDate()).padStart(2, '0') + '.' + String(today.getMonth() + 1).padStart(2, '0') + '.' + today.getFullYear();
-let guga = 0;
-let data = '';
-let obtained = false;
+
 // рабоба
 async function main() {
     // первым делом проверяем наличие каких либо куки
@@ -19,7 +15,7 @@ async function main() {
 async function update_data() {
     notify("add", "Загрузка", "Обновление данных..."); 
     
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbw9YDGvewaFzmXMHL1E0enRqJN4xQKI51EPlKa7VGeonLhVEqMLSQQc6DBhTx3ti6sUpg/exec?id=1ocTHJdKOeXn_iqgoyrU3FPf_sJR_mJUEDYTj1PlSocc&sheet=1корпус';
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbzuHGkeUExGoaWnmEyK9t8pz0W5qY8HUPqegHRoaGXHvahuTXcwBrcYp-t5oy1n5npXZQ/exec?id=1ocTHJdKOeXn_iqgoyrU3FPf_sJR_mJUEDYTj1PlSocc&sheet=1корпус';
     $.ajax({
         url: scriptUrl,
         method: 'GET',
@@ -368,13 +364,54 @@ function setup_sel_menu(data) {
          // settings>filter>from_memory ===
          $(`.m_btn:contains(${localStorage.getItem("st_filter")})`).toggleClass("active");
          // settings>filter>from_memory ===
-
+        
          // settings>filter =====================================================
+
+         //settings>theme =======================================================
+         
+         //settings>theme =======================================================
         }
 
          
         
 };
+// меню выбора даты
+function setup_date_picker(today){
+    day = [String(today.getDate()).padStart(2, '0'), String(today.getMonth() + 1).padStart(2, '0'), today.getFullYear()]
+    $(".data").empty();
+    let ned = today.getDay();
+    const date = $('<h2 class="day"></h2>');
+    const sub = $('<h2 class="sub_date"></h2>');
+    date.append(getDate(day[2], day[1], day[0]) + ", " + neds[ned]);
+
+    if(today.getDate() == now.getDate()){
+        sub.append('сегодня');
+    } else if(today.getDate() == now.getDate() - 1){
+        sub.append('вчера');
+    } else if(today.getDate() == now.getDate() + 1){
+        sub.append('завтра');
+    } else if(today.getDate() < now.getDate()){
+        sub.append('когда-то');
+    } else if(today.getDate() > now.getDate()){
+        sub.append('когда-нибудь');
+    }
+
+
+    $(".data").append(date);
+    $(".data").append(sub);
+
+}
+// ооп кому он нужен?
+function getDate(year, month, day) {
+    var options = {
+        month: 'long',
+        day: 'numeric',
+        timezone: 'UTC'
+      };
+      return (new Date(year, month - 1, day).toLocaleString("ru", options));
+    }
+
+
 // всякие ивент листеры и тд
 function control_events() {
         // меню ================================================================
@@ -406,8 +443,28 @@ function control_events() {
         //}
         // settings>radio ======================================================
 
+        // settings>theme ======================================================
+        if(localStorage.getItem("theme")){
+            $('.view_').toggleClass("dark")
+        }
+        $(".theme").click(function () {
+            $('.view_').toggleClass("dark")
+            if(!localStorage.getItem("theme")) {localStorage.setItem('theme', 'dark')} 
+            else localStorage.removeItem('theme');
+        });
+        // settings>theme ======================================================
 
-       
+        // main>date ===========================================================
+        $(".arrow-left-3").click(function () {
+            today.setDate(today.getDate() - 1);
+            setup_date_picker(today)
+        });
+    
+        $(".arrow-right-3").click(function () {
+            today.setDate(today.getDate() + 1);
+            setup_date_picker(today)
+        });
+        // main>date ===========================================================
 
 
         // settings>loca =======================================================
@@ -416,9 +473,41 @@ function control_events() {
 
 }
 
+let guga = 0;
+let data = '';
+let obtained = false;
+let today = new Date();
+let now = new Date();
+let neds = [
+    'Воскресенье',
+    'Понедельник',
+    'Вторник',
+    'Среда',
+    'Четверг',
+    'Пятница',
+    'Суббота'
+  ];
+  
+
     // старт
     $(document).ready(function () {
+        
         setup_background();
+        setup_date_picker(today);
         control_events();
         main();
     });
+
+function nasvay_setup{
+    $.ajax({
+        url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSEhshF7HT51ZVcR1rtuVx-M2GPVx4YFRKcR8xhxD9mgkHKJE65o-4zfJ8GQPqNrCwRxQT4PRzFXzLb/pubhtml',
+        method: 'GET',
+        dataType: 'html',
+        success: function (response) {
+            return response;
+            
+        },
+        error: function (error) {
+        }
+    });
+}

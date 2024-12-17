@@ -12,12 +12,20 @@
 
 
 <body>
+  <div class="view_">
   <canvas id="bg"></canvas>
   <div id="nav-container">
     <div id="nav-overlay"></div>
     <nav id="nav-fullscreen">
           <div id="settings">
-            <h3>Отображение</h3>
+          <div id="settings_label"><h3>Отображение</h3>
+            <div>
+              <input type="checkbox" id="theme"></input><label for="theme" class="theme">тема</label>
+            </div>
+            
+            
+          </div>
+            
             <div class="switch4-container">
               <div class="switch4">
                 <input type="radio" id="switch4-radio1" name="1" class="group"/>
@@ -44,7 +52,7 @@
     <div class="nav-card">
       <div id="card-menu">
         <svg class="arrow-left-3" viewBox="0 0 5 9"><path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z" /></svg>
-
+        <div class="data"></div>
         <svg class="arrow-right-3" viewBox="0 0 5 9"><path d="M0.419,9.000 L0.003,8.606 L4.164,4.500 L0.003,0.394 L0.419,0.000 L4.997,4.500 L0.419,9.000 Z" /></svg>
       </div>
     </div>
@@ -62,7 +70,7 @@
   <div class="progress"></div>
 </div>
 
-
+</div>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
