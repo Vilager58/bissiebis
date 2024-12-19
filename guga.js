@@ -10,32 +10,70 @@ async function main() {
     //}
     let data = await update_data();
 
-}
+};
 // обращения к серверу
 async function update_data() {
     notify("add", "Загрузка", "Обновление данных..."); 
     
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbzuHGkeUExGoaWnmEyK9t8pz0W5qY8HUPqegHRoaGXHvahuTXcwBrcYp-t5oy1n5npXZQ/exec?id=1ocTHJdKOeXn_iqgoyrU3FPf_sJR_mJUEDYTj1PlSocc&sheet=1корпус';
+    const scriptUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSEhshF7HT51ZVcR1rtuVx-M2GPVx4YFRKcR8xhxD9mgkHKJE65o-4zfJ8GQPqNrCwRxQT4PRzFXzLb/pubhtml';
     $.ajax({
         url: scriptUrl,
         method: 'GET',
-        dataType: 'json',
+        dataType: 'html',
         success: function (response) {
             notify("clear");
             notify("add", "Готово", "Данные получены!"); 
-            data = response;
-            obtain_schedule(response);
+            storage('add', parse_data(response));
+            storage("load");
+            jump_day();
+
             return response;
             
         },
         error: function (error) {
+            console.error("Ошибка при получении данных", error);
             notify("clear"); 
-            notify("add", "Ошибка", "Похоже нет связи");
+            notify("add", "Ошибка", "Успех!");
         }
     });
+    
+};
+// Парсинг таблицы
+function parse_data(data){
+    let rw_data = $(data).find("td");
+    cl_data = [];
+    len = rw_data.length;
+    for(let i = 0; i < len; i+=2){
+      let it = {}
+      if(rw_data[i].textContent.match(dateReg) != null){
+        it['date'] = rw_data[i].textContent;
+        it['data'] = rw_data[i + 1].textContent;
+        cl_data.push(it);
+      }
+    }
+    return cl_data
+};
+// работа с данными
+function storage(mode, data){
+   switch(mode){
+    case 'load':
+        len = localStorage.length;
+        for(let i = 0; i<len; i++){
+            let key = localStorage.key(i);
+            if(key.match(dateReg) != null){
+                dates[key] = JSON.parse(localStorage[key])
+            }
+        }
+        return dates
+    case 'add':
+        len = data.length;
+        for(let i = 0; i<len; i++){
+            localStorage.setItem(data[i].date, data[i].data)
+        }
+        break
+   }
 };
 // обработка массива расписания
-
 function obtain_schedule(data) {
   $(".card_holder").empty();
   selector = localStorage.getItem("st_selector");
@@ -46,7 +84,10 @@ function obtain_schedule(data) {
     notify("add", "Ошибка", "Укажите фильтр в настройках!");
     setup_sel_menu(data);
     $("#nav-toggle").click();
+  } else if(dates[s_date] == undefined){
+        
   } else {
+    
     switch(selector){
         case 'group':
             addlesson(data.groups.find(group => group.name.includes(filter)));
@@ -91,25 +132,13 @@ function obtain_schedule(data) {
 
             break
     }
-    if(obtained === false) setup_sel_menu(data);
+    if(obtained == false) setup_sel_menu(data);
 
     obtained = true;
     
   };
     
 };
-//отображение расписания по дате
-function setup_lesson_data(today, data){
-  // today = str
-  day = [String(today.getDate()).padStart(2, '0'), String(today.getMonth() + 1).padStart(2, '0'), today.getFullYear()]
-  //some = {date: {groups: [name...]}}
-  if(data[day]){
-    addlesson(data[day])
-  } else {
-    notify('clear');
-    notify('add', 'ошибка', 'похоже такой даты нет(')
-  }
-}
 // сборка уроков
 function addlesson(data) {
     let lessons = data.lessons
@@ -143,7 +172,7 @@ function addlesson(data) {
         const classrom = $('<h2 class="classroom"></h2>');
         
         if(lessons[i].lplace != undefined){
-            classrom.append('<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 50 50" id="home"><path" d="M 24.962891 1.0546875 A 1.0001 1.0001 0 0 0 24.384766 1.2636719 L 1.3847656 19.210938 A 1.0005659 1.0005659 0 0 0 2.6152344 20.789062 L 4 19.708984 L 4 46 A 1.0001 1.0001 0 0 0 5 47 L 18.832031 47 A 1.0001 1.0001 0 0 0 19.158203 47 L 30.832031 47 A 1.0001 1.0001 0 0 0 31.158203 47 L 45 47 A 1.0001 1.0001 0 0 0 46 46 L 46 19.708984 L 47.384766 20.789062 A 1.0005657 1.0005657 0 1 0 48.615234 19.210938 L 41 13.269531 L 41 6 L 35 6 L 35 8.5859375 L 25.615234 1.2636719 A 1.0001 1.0001 0 0 0 24.962891 1.0546875 z M 25 3.3222656 L 44 18.148438 L 44 45 L 32 45 L 32 26 L 18 26 L 18 45 L 6 45 L 6 18.148438 L 25 3.3222656 z M 37 8 L 39 8 L 39 11.708984 L 37 10.146484 L 37 8 z M 20 28 L 30 28 L 30 45 L 20 45 L 20 28 z"></path><svg>');
+            classrom.append('<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 50 50" id="home"><path fill="#fff" d="M 24.962891 1.0546875 A 1.0001 1.0001 0 0 0 24.384766 1.2636719 L 1.3847656 19.210938 A 1.0005659 1.0005659 0 0 0 2.6152344 20.789062 L 4 19.708984 L 4 46 A 1.0001 1.0001 0 0 0 5 47 L 18.832031 47 A 1.0001 1.0001 0 0 0 19.158203 47 L 30.832031 47 A 1.0001 1.0001 0 0 0 31.158203 47 L 45 47 A 1.0001 1.0001 0 0 0 46 46 L 46 19.708984 L 47.384766 20.789062 A 1.0005657 1.0005657 0 1 0 48.615234 19.210938 L 41 13.269531 L 41 6 L 35 6 L 35 8.5859375 L 25.615234 1.2636719 A 1.0001 1.0001 0 0 0 24.962891 1.0546875 z M 25 3.3222656 L 44 18.148438 L 44 45 L 32 45 L 32 26 L 18 26 L 18 45 L 6 45 L 6 18.148438 L 25 3.3222656 z M 37 8 L 39 8 L 39 11.708984 L 37 10.146484 L 37 8 z M 20 28 L 30 28 L 30 45 L 20 45 L 20 28 z"></path><svg>');
             classrom.append(`<p>${lessons[i].lplace}</p>`);
         }
 
@@ -285,11 +314,11 @@ function notify(mode, text1, text2, color, ico) {
 
             timer1 = setTimeout(() => {
                 toast.classList.remove("active");
-            }, 5000); //1s = 1000 milliseconds
+            }, 2000); //1s = 1000 milliseconds
 
             timer2 = setTimeout(() => {
                 progress.classList.remove("active");
-            }, 5300);
+            }, 2300);
             break
         case "clear":
             clearTimeout(timer1);
@@ -309,7 +338,7 @@ function setup_sel_menu(data) {
         $(`input[name="1"][class=${selector}]`).prop('checked', true);
         $('.groups').remove()
         const groups = $('<sp class="groups"></sp>');
-        if(data.groups){
+
         switch (selector) {
             case 'group':
                 for (let i = 0; i <= data.groups.length - 1; i++) {
@@ -358,7 +387,7 @@ function setup_sel_menu(data) {
                 $('#selector').append(groups);
                 break
 
-        }}
+        }
         if(localStorage.getItem("st_filter")){
          // settings>filter =====================================================
          prev_filer = '';
@@ -369,8 +398,7 @@ function setup_sel_menu(data) {
                  prev_filer = $(this).text();
                  localStorage.setItem('st_filter', prev_filer);
                  $(this).toggleClass("active");
-                 obtain_schedule(data);
-                 
+                 obtain_schedule(dates[s_date])
                  
              }
          });
@@ -413,6 +441,19 @@ function setup_date_picker(today){
     $(".data").append(date);
     $(".data").append(sub);
 
+};
+// сборка по дню
+function jump_day(){
+    s_date = getDate_str(day[2], day[1], day[0]);
+    if(dates[s_date] != undefined){
+        $('.no_data').css("opacity", '0');
+        $('.card_holder').css("opacity", '1');
+        obtain_schedule(dates[s_date]);
+        
+    } else {
+        $('.card_holder').css("opacity", '0');
+        $('.no_data').css("opacity", '1');
+    }
 }
 // ооп кому он нужен?
 function getDate(year, month, day) {
@@ -422,7 +463,17 @@ function getDate(year, month, day) {
         timezone: 'UTC'
       };
       return (new Date(year, month - 1, day).toLocaleString("ru", options));
-    }
+};
+
+function getDate_str(year, month, day) {
+    var options = {
+        month: 'numeric',
+        day: 'numeric',
+        year: 'numeric',
+        timezone: 'UTC'
+      };
+      return (new Date(year, month - 1, day).toLocaleString("ru", options));
+};
 
 
 // всякие ивент листеры и тд
@@ -447,7 +498,8 @@ function control_events() {
             if ($(this).prev().attr('class') != prev_radio) {
                 prev_radio = $(this).prev().attr('class');
                 localStorage.setItem('st_selector', prev_radio);
-                if(data != undefined) setup_sel_menu(data);
+                if(dates != undefined & dates[s_date] != undefined) setup_sel_menu(dates[s_date]);
+                    else setup_sel_menu(dates[Object.keys(dates)[Object.keys(dates).length - 1]])
             }
         });
         //if (localStorage.getItem('settings_selector')) {
@@ -470,12 +522,15 @@ function control_events() {
         // main>date ===========================================================
         $(".arrow-left-3").click(function () {
             today.setDate(today.getDate() - 1);
-            setup_date_picker(today)
+
+            setup_date_picker(today);
+            jump_day();
         });
     
         $(".arrow-right-3").click(function () {
             today.setDate(today.getDate() + 1);
-            setup_date_picker(today)
+            setup_date_picker(today);
+            jump_day();
         });
         // main>date ===========================================================
 
@@ -484,13 +539,14 @@ function control_events() {
 
         // settings>loca =======================================================
 
-}
-
+};
+dates = {};
 let guga = 0;
 let data = '';
 let obtained = false;
 let today = new Date();
 let now = new Date();
+let day = [String(today.getDate()).padStart(2, '0'), String(today.getMonth() + 1).padStart(2, '0'), today.getFullYear()]
 let neds = [
     'Воскресенье',
     'Понедельник',
@@ -500,27 +556,14 @@ let neds = [
     'Пятница',
     'Суббота'
   ];
-  
+  let dateReg = /^\d{2}([./-])\d{2}\1\d{4}$/;
 
     // старт
     $(document).ready(function () {
-        
         setup_background();
         setup_date_picker(today);
+        storage("load");
         control_events();
+        jump_day();
         main();
     });
-
-//function nasvay_setup{
-//    $.ajax({
- //       url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSEhshF7HT51ZVcR1rtuVx-M2GPVx4YFRKcR8xhxD9mgkHKJE65o-4zfJ8GQPqNrCwRxQT4PRzFXzLb/pubhtml',
- //       method: 'GET',
- //       dataType: 'html',
-//        success: function (response) {
-//            return response;
-//            
-//        },
-//        error: function (error) {
-//        }
-//    });
-//}

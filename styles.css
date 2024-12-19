@@ -6,7 +6,7 @@
 }
 
 .view_ {
-  transition: 0.5s ease-in-out;
+  transition: 0.1s ease;
   display: flex;
   width: 100%;
   height: 100%;
@@ -21,7 +21,7 @@
  }
 
 .dark{
-  transition: 0.5s ease-in-out;
+  transition: 0.1s ease;
   --color1: #0d0a1c;
   --color2: #201a47;
   --color3: #332971;
@@ -32,7 +32,7 @@
 }
 
 h3{
-  transition: 0.5s ease-in-out;
+  transition: 0.1s ease;
 }
  
  /* менюшка ============================== */
@@ -61,7 +61,7 @@ h3{
    position: absolute;
    left: 0;
    content: "";
-   transition: 0.5s ease-in-out;
+   transition: 0.1s ease;
  }
 
  #nav-toggle span:nth-child(1) {
@@ -102,9 +102,9 @@ h3{
    left: 16px;
    z-index: -1;
    background: rgba(0, 0, 0, 0.8);
-   transition: 0.5s ease-in-out;
+   transition: 0.1s ease;
    border-radius: 50%;
-   transition: 1s;
+   transition: 0.1s ease;
    transform: scale3d(0, 0, 0);
  }
 
@@ -118,7 +118,7 @@ h3{
    flex-direction: column;
    left: 0;
    top: 0;
-   transition: 0.5s ease-in-out;
+   transition: 0.1s ease;
    transition-delay: 0s;
    visibility: hidden;
    opacity: 0;
@@ -131,14 +131,13 @@ h3{
  #nav-fullscreen a {
    color: var(--text);
    text-decoration: none;
-   transition: 0.5s ease-in-out;
+   transition: 0.1s ease;
  }
 
  #nav-fullscreen.open {
    visibility: visible;
    opacity: 1;
-   transition: ease-in-out 0.5s;
-   transition-delay: 0.25s;
+   transition: 0.1s ease;
  }
 
  *,
@@ -151,7 +150,7 @@ h3{
    background: linear-gradient(-45deg, var(--color2), var(--color3), var(--color2), var(--color3));
    background-size: 400% 400%;
    animation: gradient 15s ease infinite;
-   transition: 0.5s ease-in-out;
+   transition: 0.1s ease;
    height: 100vh;
  }
 
@@ -183,7 +182,7 @@ h3{
    justify-content: center;
    color: var(--text);
    font-size: 10vh;
-   transition: 0.5s ease-in-out;
+   transition: 0.1s ease;
  }
 
  #nav-fullscreen li:hover {
@@ -204,13 +203,11 @@ h3{
   }
   #card-menu{
    z-index: 2;
-
    max-width: 700px;
    padding: 10px;
-   margin-top: 50px;
-   margin-bottom: 8px;
+   margin-top: 25px;
    width: 90%;
-   height: 20%;
+   height: 15%;
    display: flex;
    align-items: center;
    justify-content: space-between;
@@ -226,7 +223,7 @@ h3{
 .arrow-left-3 path,
 .arrow-right-3 path{
     fill: var(--color6);
-    transition: fill 0.5s ease-out;
+    transition: fill 0.1s ease;
 }
 
 .arrow-left-3 {
@@ -268,7 +265,7 @@ h3{
    min-width: 35px;
    background-color: var(--color6);
    color: var(--text);
-   transition: 0.5s ease-in-out;
+   transition: 0.1s ease;
    font-size: 20px;
    border-radius: 50%;
  }
@@ -283,12 +280,12 @@ h3{
    font-size: 16px;
    font-weight: 400;
    color: var(--text);
-   transition: 0.5s ease-in-out;
+   transition: 0.1s ease;
  }
 
  .message .text-2 {
 
-  transition: 0.5s ease-in-out;
+  transition: 0.1s ease;
    color: var(--text);
  }
 
@@ -322,7 +319,7 @@ h3{
    height: 100%;
    width: 100%;
    background-color: var(--color6);
-   transition: 0.5s ease-in-out;
+   transition: 0.1s ease;
  }
 
  .progress.active:before {
@@ -380,7 +377,7 @@ h3{
   border: 1px solid var(--text);
   border-radius: 12px;
   opacity: .5;
-  transition: .5s left ease;
+  transition: 0.1s left ease;
 }
 #switch4-radio1:checked ~ #active-label{
   left:0;
@@ -399,7 +396,7 @@ h3{
    flex-direction: column;
    max-width: 600px;
    background-color: var(--color1);
-   transition: 0.5s ease-in-out;
+   transition: 0.1s ease;
    box-shadow: 0px 0px 24px 6px rgba(13, 10, 28, 0.42);
    min-height: 70%;
    border-radius: 10px;
@@ -416,9 +413,9 @@ h3{
  .groups{
   padding-top: 20px;
   min-width: 40%;
-  font-size: 1rem;
+  font-size: 1.5vh;
   display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-columns: 33% 33% 33%;
   
  }
 
@@ -431,19 +428,19 @@ h3{
   padding: 10px;
   margin: 5px;
   cursor: pointer;
-  transition: 0.5s ease-in-out;
+  transition: 0.1s ease;
  }
 
  .m_btn.active{
   background-color: var(--color1);
 
-  transition: 0.5s ease-in-out;
+  transition: 0.1s ease;
  }
 
  #footer {
    font-size: 10px;
    text-decoration-color: var(--color1);
-   transition: 0.5s ease-in-out;
+   transition: 0.1s ease;
    opacity: 10%;
  }
 
@@ -455,9 +452,8 @@ button.primary {
 	background: rgb(var(--vs-primary) / 100%);
 	padding: 13px 25px;
 	border-radius: 17px;
-	transition: background-color 0.1s ease;
+	transition: 0.1s ease;
 	box-sizing: border-box;
-	transition: all 0.25s ease;
 	border: 0;
 	cursor: pointer;
 	box-shadow: 0 10px 20px -10px rgb(var(--vs-primary) / 50%);
@@ -484,7 +480,7 @@ button.primary {
   padding: 2px;
   border-radius: 2px;
   background-color: var(--color4);
-  transition: 0.5s ease-in-out;
+  transition: 0.1s ease;
 }
  /* настройка ============================== */
 
@@ -493,7 +489,7 @@ body {
    overflow: hidden;
    margin: 0;
    background-color: var(--color1);
-   transition: 0.5s ease-in-out;
+   transition: 0.1s ease;
    vertical-align: middle;
    height: 100vh;
    display: flex;
@@ -506,7 +502,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  font-size: 1lvh;
+  font-size: 2vh;
   max-height: 100px;
  
  }
@@ -521,6 +517,20 @@ body {
 
  }
 
+ .no_data{
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+  text-align: center;
+  max-width: 700px;
+  max-height: 15%;
+  padding: 10px;
+  background-color: var(--color6);
+  border-radius: 20px ;
+  margin-top: 100px;
+  transition: 0.1s ease;
+ }
+
  .card_holder {
    display: flex;
    position: absolute;
@@ -529,7 +539,6 @@ body {
    align-items: center;
    height: 100%;
    width: 100%;
-
  }
 
  .lesson-card-horizontal {
@@ -538,13 +547,12 @@ body {
 
    backdrop-filter: blur(2px);
    -webkit-backdrop-filter: blur(2px);
-
-   border: 2px solid var(--color6);
-   transition: 0.5s ease-in-out;
-   border-radius: 10px;
-   box-shadow: 0 4px 8px rgba(108, 88, 241, 0.5);
    max-width: 700px;
    max-height: 15%;
+   border: 2px solid var(--color6);
+   transition: 0.1s ease;
+   border-radius: 10px;
+   box-shadow: 0 4px 8px rgba(108, 88, 241, 0.5);
    padding: 0;
    margin-top: 8px;
    margin-bottom: 8px;
@@ -578,7 +586,7 @@ body {
   width: 100%;
   display: flex;
   align-items: center;
-  transition: all 0.5s ease;
+  transition: 0.1s ease;
 
 }
 
@@ -613,7 +621,7 @@ body {
    background: none;
    border: 2px solid var(--text);
    color: var(--text);
-   transition: 0.5s ease-in-out;
+   ttransition: 0.1s ease;
    text-align: center;
 
 
@@ -623,7 +631,7 @@ body {
    font-size: 2.5vh;
    color: var(--text);
    margin: 0;
-   transition: 0.5s ease-in-out;
+   transition: 0.1s ease;
  }
 
  .lesson-time {
@@ -631,7 +639,7 @@ body {
    color: var(--text);
    height: 30%;
    margin: 0;
-   transition: 0.5s ease-in-out;
+   transition: 0.1s ease;
  }
 
  .teacher-name {
@@ -641,7 +649,7 @@ body {
    flex-direction: row;
    align-items: center;
    color: var(--color1);
-   transition: 0.5s ease-in-out;
+   transition: 0.1s ease;
    font-size: 2.5vh;
    height: 50%;
    margin: 0;
@@ -655,7 +663,7 @@ body {
    align-items: center;
    font-size: 2vh;
    color: var(--text);
-   transition: 0.5s ease-in-out;
+   transition: 0.1s ease;
    margin: 0;
  }
 
@@ -679,7 +687,7 @@ body {
    width: 100%;
    height: 100%;
    background-color: var(--color1);
-   transition: 0.5s ease-in-out;
+   transition: 0.1s ease;
  }
 
  /* фон ============================== */
