@@ -8,6 +8,7 @@ async function main() {
     //} else {
     //     addlesson(get_local_data());
     //}
+    $.ajaxSetup({ cache: false });
     let data = await update_data();
 
 };
@@ -354,16 +355,17 @@ function setup_sel_menu(data) {
                 let teachers = [];
                 for (let i = 0; i <= data.groups.length - 1; i++) {
                     for (let y = 0; y <= data.groups[i].lessons.length - 1; y++) {
-                        teachers.push(data.groups[i].lessons[y].lteach);
+                            teachers.push(data.groups[i].lessons[y].lteach);
                     };
                 };
-                teachers = arr = $.grep([...new Set(teachers)], n => n == 0 || n);
+                teachers = $.grep([...new Set(teachers)], n => n == 0 || n);
 
                 for (let i = 0; i <= teachers.length - 1; i++) {
                     const group = $('<sp class="m_btn"></sp>');
+                    if(!teachers[i].includes("нет") & teachers[i].length > 3){
                     group.append(teachers[i]);
-                    
                     groups.append(group);
+                    };
                 };
                 $('#selector').append(groups);
                 break
@@ -455,7 +457,7 @@ function jump_day(){
         $('.no_data').css("opacity", '1');
     }
 }
-// ооп кому он нужен?
+// ооп кому оно надо?
 function getDate(year, month, day) {
     var options = {
         month: 'long',
