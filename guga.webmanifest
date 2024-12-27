@@ -1,7 +1,7 @@
 {
     "name": "Guga's schedule",
     "short_name": "schedule",
-    "start_url": "/index.html",
+    "start_url": "./index.html",
     "display": "standalone",
     "description": "Guga's schedule web app for SLT",
     "background_colot": "#fafafa",
