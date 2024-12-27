@@ -1,0 +1,86 @@
+{
+    "name": "Guga's schedule",
+    "short_name": "schedule",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "description": "Guga's schedule web app for SLT",
+    "background_colot": "#fafafa",
+    "orientation": "portrait-primary",
+    "icons":[
+        {
+            "src": "/favicon.png",
+            "type": "image/png",
+            "sizes": "1024x1024"
+        }
+    ],
+
+    "screenshots": [
+           {
+            "src": "screenshots/dark_mobile.png",
+             "sizes": "320x640",
+             "type": "image/png",
+             "form_factor": "narrow",
+             "label": "GUGA"
+           },
+
+           {
+            "src": "screenshots/white_mobile.png",
+             "sizes": "320x640",
+             "type": "image/png",
+             "form_factor": "narrow",
+             "label": "GUGA"
+           },
+
+           {
+            "src": "screenshots/dark_mobile_selection.png",
+             "sizes": "320x640",
+             "type": "image/png",
+             "form_factor": "narrow",
+             "label": "GUGA"
+           },
+
+           {
+            "src": "screenshots/white_mobile_selection.png",
+             "sizes": "320x640",
+             "type": "image/png",
+             "form_factor": "narrow",
+             "label": "GUGA"
+           },
+
+           {
+            "src": "screenshots/dark_wide.png",
+             "sizes": "1280x720",
+             "type": "image/png",
+             "form_factor": "wide",
+             "label": "GUGA"
+           },
+
+           {
+            "src": "screenshots/dark_wide_selection.png",
+             "sizes": "1280x720",
+             "type": "image/png",
+             "form_factor": "wide",
+             "label": "GUGA"
+           },
+
+           {
+            "src": "screenshots/white_wide.png",
+             "sizes": "1280x720",
+             "type": "image/png",
+             "form_factor": "wide",
+             "label": "GUGA"
+           },
+
+           {
+            "src": "screenshots/white_wide_selection.png",
+             "sizes": "1280x720",
+             "type": "image/png",
+             "form_factor": "wide",
+             "label": "GUGA"
+           }
+
+        
+        
+    ]
+
+}
