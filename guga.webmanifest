@@ -8,7 +8,7 @@
     "orientation": "portrait-primary",
     "icons":[
         {
-            "src": "/favicon.png",
+            "src": "./bissiebis/favicon.png",
             "type": "image/png",
             "sizes": "1024x1024"
         }
