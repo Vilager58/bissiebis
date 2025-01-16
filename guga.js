@@ -338,18 +338,25 @@ function setup_sel_menu(data) {
     }
         $(`input[name="1"][class=${selector}]`).prop('checked', true);
         $('.groups').remove()
-        const groups = $('<sp class="groups"></sp>');
+        const items = $('<sp class="groups"></sp>');
 
         switch (selector) {
             case 'group':
-                for (let i = 0; i <= data.groups.length - 1; i++) {
-                    let rw_group = data.groups[i].name;
-                    const group = $('<sp class="m_btn"></sp>');
-                    group.append(rw_group.replace('группа ', ''));
-                    
-                    groups.append(group);
+                let rw_group = [];
+                for (let i = 0; i < data.groups.length; i++) {
+                    rw_group.push(data.groups[i].name.replace('группа ', ''));
                 };
-                $('#selector').append(groups);
+
+                rw_group.sort(function (a, b) { return a.localeCompare(b) });
+
+                for(let i = 0; i < rw_group.length; i++){
+                    let grp = rw_group[i];
+                    const group = $('<sp class="m_btn"></sp>');
+                    group.append(grp);
+                    items.append(group);
+                };
+
+                $('#selector').append(items);
                 break
             case 'teacher':
                 let teachers = [];
@@ -358,16 +365,18 @@ function setup_sel_menu(data) {
                             teachers.push(data.groups[i].lessons[y].lteach);
                     };
                 };
+
                 teachers = $.grep([...new Set(teachers)], n => n == 0 || n);
+                teachers.sort(function (a, b) { return a.localeCompare(b) });
 
                 for (let i = 0; i <= teachers.length - 1; i++) {
-                    const group = $('<sp class="m_btn"></sp>');
+                    const teacher = $('<sp class="m_btn"></sp>');
                     if(!teachers[i].includes("нет") & teachers[i].length > 3){
-                    group.append(teachers[i]);
-                    groups.append(group);
+                    teacher.append(teachers[i]);
+                    items.append(teacher);
                     };
                 };
-                $('#selector').append(groups);
+                $('#selector').append(items);
                 break
 
             case 'place':
@@ -375,18 +384,20 @@ function setup_sel_menu(data) {
                 for (let i = 0; i <= data.groups.length - 1; i++) {
                     for (let y = 0; y <= data.groups[i].lessons.length - 1; y++) {
                         let rw_place = data.groups[i].lessons[y].lplace;
-                        if(rw_place != undefined) places.push(rw_place.replace('1 корпус', ''));
+                        if(rw_place != undefined) places.push(rw_place.replace('1 корпус', '').replace('кор.2', '').replace('  ', ''));
+
                     };
                 };
                 places = arr = $.grep([...new Set(places)], n => n == 0 || n);
+                places.sort();
 
                 for (let i = 0; i <= data.groups.length - 1; i++) {
-                    const group = $('<sp class="m_btn"></sp>');
-                    group.append(places[i]);
-                   
-                    groups.append(group);
+                    const place = $('<sp class="m_btn"></sp>');
+                    place.append(places[i]);
+                    items.append(place);
                 };
-                $('#selector').append(groups);
+
+                $('#selector').append(items);
                 break
 
         }
@@ -513,8 +524,11 @@ function control_events() {
         // settings>theme ======================================================
         if(localStorage.getItem("theme")){
             $('.view_').toggleClass("dark")
+            $('[name="theme_switch"]').prop('checked', true);
+
         }
-        $(".theme").click(function () {
+
+        $('[name="theme_switch"]').click(function () {
             $('.view_').toggleClass("dark")
             if(!localStorage.getItem("theme")) {localStorage.setItem('theme', 'dark')} 
             else localStorage.removeItem('theme');
