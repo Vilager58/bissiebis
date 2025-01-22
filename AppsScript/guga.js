@@ -1,12 +1,10 @@
-
 function doGet(request) {
     // Get request params.
-    var sheetKey = request.parameters.id;
     var sheetName = request.parameters.sheet;
     var callback = request.parameters.callback;
 
     // Parse the spreadsheet.
-    var spreadsheet = SpreadsheetApp.openById(sheetKey);
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
     var sheet = spreadsheet.getSheetByName(sheetName);
 
     data = find(sheet);
@@ -30,6 +28,7 @@ function doGet(request) {
 
 function find(sheet) {
     // создание фильтра для поиска по разделителю - №
+    Logger.log(sheet)
     let ranges = sheet
         .createTextFinder("№")
         .matchEntireCell(true)
@@ -69,7 +68,6 @@ function find(sheet) {
             place_data = place_data.filter(function (str) {
                 return /\S/.test(str);
             });
-            Logger.log(lesson_data);
             if (lesson_data.length <= 4) {
                 place = place_obtain(place_data);
 
@@ -164,7 +162,6 @@ function obtain_YP(data) {
         if (data[i] != undefined) {
             if (data[i].match(shift_filtr) !== null & data.length < 4){
                 data.splice(i - 1, 2, data[i - 1] + ' ' + data[i]);
-                Logger.log(data)
               }
             }
         };
@@ -219,30 +216,72 @@ function run(request) {
     return(doGet(request).getContent().toString());
 }
 
-let lists = ['1корпус', '1курс', '2курс', '3-4курс'];
+let lists = ['1корпус', '1курс', '2-4курс'];
 let some = {};
 function run_obtain() {
   let resp = {'groups': []};
   lists.forEach((list) => {
     let some = run({ parameters: {
-            id: "1ocTHJdKOeXn_iqgoyrU3FPf_sJR_mJUEDYTj1PlSocc",
             sheet: list,
         }
     })
     some = JSON.parse(some);
     some.groups.forEach((groups) => resp.groups.push(groups))
   });
-  Logger.log(JSON.stringify(resp));
    return JSON.stringify(resp);
   }
 
-function onedi(){
-  let sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  let cell = sheet.getRange(1, 2)
-  cell.setValue(run_obtain());
+function numofmonth(str){
+   let months = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сент', 'окт', 'ноя', 'дек'];
+   for(month in months){
+    if(str.includes(months[month])){
+      month++;
+      if(month < 10) month = 0 + String(month);
+      return String(month);
+    }
+   }
+
 }
 
+function onOpen() {
+  var ui = SpreadsheetApp.getUi();
+  ui.createMenu('Публикация в базу')
+    .addItem('Выгрузить', 'onEdit')
+    .addToUi();
+}
 
+function onEdit(){
+  let sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Export');
+  let sh_date_find = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('1корпус');
+  let table = sheet.getRange(1, 1, 7, 2).getValues()
+  let used = 1;
+
+  let yr = String(new Date().getFullYear());
+  let date_finder = sh_date_find.createTextFinder(yr).findAll();
+  let date = date_finder[1].getValue().split(' ');
+  date = date[0] + '.' + numofmonth(date[1]) + '.' + date[2];
+
+  for (row in table){
+    if(table[row][0] != ''){
+      if(table[row][0].includes(date)){
+      break
+      } else used++;
+    }
+    
+  }
+  Logger.log(used)
+
+  if(used == 7){
+    sheet.getRange(1, 1, 7, 2).clear();
+    used = 0;
+  }
+
+  let date_cell = sheet.getRange(used, 1);
+  let data_cell = sheet.getRange(used, 2);
+  
+  date_cell.setValue(date);
+  data_cell.setValue(run_obtain());
+}
 
 
 

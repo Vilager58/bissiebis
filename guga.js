@@ -16,7 +16,7 @@ async function main() {
 async function update_data() {
     notify("add", "Загрузка", "Обновление данных..."); 
     
-    const scriptUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSEhshF7HT51ZVcR1rtuVx-M2GPVx4YFRKcR8xhxD9mgkHKJE65o-4zfJ8GQPqNrCwRxQT4PRzFXzLb/pubhtml';
+    const scriptUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSxraUPIhMpBoDFLePyCHJM9hTQNUlP0EdHRLkl0UtDULVTYiHE3D8qCtvo8NqFELBFO3dpMsJrfnhO/pubhtml?gid=377065937&single=true';
     $.ajax({
         url: scriptUrl,
         method: 'GET',
