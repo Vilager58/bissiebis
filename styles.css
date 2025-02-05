@@ -11,25 +11,26 @@
   width: 100%;
   height: 100%;
   font-family: HaloGrotesk-Regular;
-  --color1: #edf2fa;
-  --color2: #d7e3fc;
-  --color3: #ccdbfd;
-  --color4: #c1d3fe;
-  --color5: #5948c6;
-  --color6: #abc4ff;
-  --text: black;
+  --color1: #e5e3dd;
+  --color2: #d7d4cc;
+  --color3: #cac5b9;
+  --color4: #beb49a;
+  --color5: #005e49;
+  --color6: #007b5f;
+  --text: #21221b;
  }
 
 .dark{
   transition: 0.1s ease;
-  --color1: #0d0a1c;
-  --color2: #201a47;
-  --color3: #332971;
-  --color4: #46399c;
-  --color5: #5948c6;
-  --color6: #6c58f1;
-  --text: white;
+  --color1: #003d30;
+  --color2: #00503f;
+  --color3: #005e49;
+  --color4: #beb49a;
+  --color5: #d7d4cc;
+  --color6: #008f70;
+  --text: #e5e3dd;
 }
+
 
 h3{
   transition: 0.1s ease;
@@ -41,6 +42,8 @@ h3{
    margin-left: auto;
    position: absolute;
    z-index: 5;
+   display: flex;
+   flex-direction: row;
  }
 
  #nav-toggle {
@@ -170,7 +173,7 @@ h3{
 
 
  #nav-toggle span {
-   background-color: #8979F3;
+   background-color: var(--color5);
  }
 
 
@@ -288,7 +291,7 @@ input {
 	transition-timing-function: var(--trans-timing-in);
 }
 .switch__input {
-	background-color: hsl(210,90%,70%);
+	background-color: #e5e3dd;
 	border-radius: 0.75em;
 	box-shadow:
 		0 0 0 0.125em hsla(var(--hue),90%,50%,0),
@@ -316,7 +319,7 @@ input {
 	position: absolute;
 }
 .switch__input:before {
-	background-color: #abc4ff;
+	background-color: #007b5f;
 	border-radius: inherit;
 	mask-image: linear-gradient(120deg,hsl(0,0%,0%) 20%,hsla(0,0%,0%,0) 80%);
 	-webkit-mask-image: linear-gradient(120deg,hsl(0,0%,0%) 20%,hsla(0,0%,0%,0) 80%);
@@ -324,7 +327,7 @@ input {
 	transition: background-color var(--trans-dur) var(--trans-timing);
 }
 .switch__input:after {
-	background-color: #edf2fa;
+	background-color: #e5e3dd;
 	border-radius: 50%;
 	box-shadow: 0.05em 0.05em 0.05em hsla(var(--hue),90%,10%,0.1);
 	top: 0.125em;
@@ -337,13 +340,13 @@ input {
 	z-index: 1;
 }
 .switch__input:checked {
-	background-color: #6c58f1;
+	background-color: #009775;
 }
 .switch__input:checked:before {
-	background-color: #0d0a1c;
+	background-color: #003b2e;
 }
 .switch__input:checked:after {
-	background-color: hsl(0,0%,0%);
+	background-color: #002f24;
 	transform: translateX(1.5em);
 }
 .switch__input:checked ~ .switch__icon--light,
@@ -706,7 +709,7 @@ body {
    border: 2px solid var(--color6);
    transition: 0.1s ease;
    border-radius: 10px;
-   box-shadow: 0 4px 8px rgba(108, 88, 241, 0.5);
+   box-shadow: 0 4px 8px var(--color6);
    padding: 0;
    margin-top: 8px;
    margin-bottom: 8px;
@@ -776,7 +779,7 @@ body {
    background: none;
    border: 2px solid var(--text);
    color: var(--text);
-   ttransition: 0.1s ease;
+   transition: 0.1s ease;
    text-align: center;
 
 
@@ -847,3 +850,56 @@ body {
 
  /* фон ============================== */
  
+
+  /* обучение ============================== */
+  h1{
+    font-family: HaloGrotesk-Regular;
+    color: var(--text);
+    text-align: center;
+  }
+
+  .btn-2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  button.conf{
+    background-color: var(--color5);
+    border-radius: 10px;
+    border: none;
+    padding: 20px;
+    font-size: 1.8em;
+    width: 2em;
+    color: var(--text);
+  }
+  
+  button.conf + button.conf {
+    margin-left: 20px;
+  }
+
+  button.conf.decline{
+    background-color: var(--color2);
+  }
+ 
+  .learn-box{
+    flex-direction: column;
+    transition: opacity 2s;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    z-index: 100;
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #help-open{
+    transition: opacity 1s;
+    opacity: 0;
+  }
+
+  /* обучение ============================== */

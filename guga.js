@@ -1,5 +1,6 @@
 
 // рабоба
+let learning = false;
 async function main() {
     // первым делом проверяем наличие каких либо куки
     // дабы определить является ли пользователь новым.
@@ -84,7 +85,6 @@ function obtain_schedule(data) {
     notify("clear");
     notify("add", "Ошибка", "Укажите фильтр в настройках!");
     setup_sel_menu(data);
-    $("#nav-toggle").click();
   } else if(dates[s_date] == undefined){
         
   } else {
@@ -227,7 +227,7 @@ function setup_background() {
         size = 2,
         speed = 10,
         parts = new Array,
-        colors = ['#201a47', '#332971', '#46399c', '#46399c', '#46399c'];
+        colors = ['#007b5f', '#1f9a7e', '#1d6051', '#0b573d', '#21b594'];
     var mouse = {
         x: 0,
         y: 0
@@ -408,6 +408,11 @@ function setup_sel_menu(data) {
              if ($(this).text() != prev_filer) {
                 $('.m_btn.active').toggleClass("active");
                 $("#nav-toggle").click();
+                if(learning){
+                    $('.learn-box').css('opacity', '0');
+                    localStorage.setItem('first', false);
+                    setTimeout(function(){$('.learn-box').css('display', 'none');}, 2000);
+                }
                  prev_filer = $(this).text();
                  localStorage.setItem('st_filter', prev_filer);
                  $(this).toggleClass("active");
@@ -493,6 +498,11 @@ function getDate_str(year, month, day) {
 function control_events() {
         // меню ================================================================
         $("#nav-toggle").click(function () {
+            if(learning){
+                $('#help-open').css('opacity', '0');
+                
+            } 
+            
             $("#nav-toggle, #nav-overlay, #nav-fullscreen").toggleClass("open");
         });
         $(window).resize(resizeNav);
@@ -551,11 +561,28 @@ function control_events() {
         // main>date ===========================================================
 
 
-        // settings>loca =======================================================
-
-        // settings>loca =======================================================
-
+        // режим обучения =======================================================
+        if(!localStorage.getItem("first")){
+            console.log('первый раз');
+            learning = true;
+            learn();
+        } else {
+            $('.learn-box').css('display', 'none');
+        }
+        // режим обучения =======================================================
 };
+
+function learn(){
+$('.learn-box').css('opacity', '1');
+$('.decline').on('click', function(){localStorage.setItem("first", false); $('.learn-box').css('opacity', '0'); setTimeout(function(){$('.learn-box').css('display', 'none');}, 2000)})
+$('.confirm').on('click', function(){
+$('#text').text('Тогда давай найдем тебя)')
+$('#help-open').text('<= Открой настройки').css('opacity', '1')
+$('input .group').click()
+$("#nav-container").css('z-index', 101);
+});
+}
+
 dates = {};
 let guga = 0;
 let data = '';
