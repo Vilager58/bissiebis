@@ -2,16 +2,17 @@
 // рабоба
 let learning = false;
 async function main() {
-    // первым делом проверяем наличие каких либо куки
-    // дабы определить является ли пользователь новым.
-    //if (document.cookie == '') {
-    //    
-    //} else {
-    //     addlesson(get_local_data());
-    //}
     $.ajaxSetup({ cache: false });
     let data = await update_data();
-
+    if(localStorage.getItem('entries') == null){
+        localStorage.setItem('entries', 1);
+    } else {
+        let s = Number(localStorage.getItem('entries')) + 1
+        localStorage.setItem('entries', s);
+        if((s == 5 || s == 10) & !localStorage.getItem('feed')){
+            feedback();
+        }
+    }
 };
 // обращения к серверу
 async function update_data() {
@@ -295,9 +296,6 @@ function setup_background() {
     function MouseMove(e) {
         mouse.x = e.layerX;
         mouse.y = e.layerY;
-
-        //context.fillRect(e.layerX, e.layerY, 5, 5);
-        //Draw( e.layerX, e.layerY );
     }
 
     create();
@@ -421,7 +419,7 @@ function setup_sel_menu(data) {
              }
          });
          // settings>filter>from_memory ===
-         $(`.m_btn:contains(${localStorage.getItem("st_filter")})`).toggleClass("active");
+         $(`.m_btn:contains("${localStorage.getItem("st_filter")}")`).toggleClass("active");
          // settings>filter>from_memory ===
         
          // settings>filter =====================================================
@@ -563,7 +561,6 @@ function control_events() {
 
         // режим обучения =======================================================
         if(!localStorage.getItem("first")){
-            console.log('первый раз');
             learning = true;
             learn();
         } else {
@@ -580,6 +577,17 @@ $('#text').text('Тогда давай найдем тебя)')
 $('#help-open').text('<= Открой настройки').css('opacity', '1')
 $('input .group').click()
 $("#nav-container").css('z-index', 101);
+});
+}
+
+function feedback(){
+$('.learn-box').css('display', 'flex')
+$('.learn-box').css('opacity', '1');
+$('#text').text('Большой кабина нраица? \n оставь отзыв пж')
+$('.decline').on('click', function(){$('.learn-box').css('opacity', '0'); setTimeout(function(){$('.learn-box').css('display', 'none');}, 2000)})
+$('.confirm').on('click', function(){
+    localStorage.setItem('feed', 'true')
+    window.open('https://docs.google.com/forms/d/e/1FAIpQLScJCdOHf693z5MiVOMXwmpAerRgT91IN7-BOfcj2McrnkduIg/viewform?usp=dialog');
 });
 }
 

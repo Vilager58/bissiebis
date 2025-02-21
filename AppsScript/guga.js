@@ -289,7 +289,7 @@ Logger.log('использовано: ' + String(used))
 
 if(used == 7){
   sheet.getRange(1, 1, 7, 2).clear();
-  used = 0;
+  used = 1;
 }
 
 let date_cell = sheet.getRange(used, 1);

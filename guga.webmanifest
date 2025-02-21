@@ -3,7 +3,7 @@
     "short_name": "schedule",
     "start_url": "./index.html",
     "display": "standalone",
-    "description": "Guga's schedule web app for SLT",
+    "description": "Guga's schedule web app for SLT ",
     "background_colot": "#fafafa",
     "orientation": "portrait-primary",
     "icons":[
@@ -78,9 +78,6 @@
              "form_factor": "wide",
              "label": "GUGA"
            }
-
-        
-        
     ]
 
 }
