@@ -583,7 +583,7 @@ $("#nav-container").css('z-index', 101);
 function feedback(){
 $('.learn-box').css('display', 'flex')
 $('.learn-box').css('opacity', '1');
-$('#text').text('Большой кабина нраица? \n оставь отзыв пж')
+$('#text').text('Нравится приложение? \n оставь отзыв)')
 $('.decline').on('click', function(){$('.learn-box').css('opacity', '0'); setTimeout(function(){$('.learn-box').css('display', 'none');}, 2000)})
 $('.confirm').on('click', function(){
     localStorage.setItem('feed', 'true')
